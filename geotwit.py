@@ -1,5 +1,6 @@
 import json
 import os
+import csv
 
 import tweepy
 
@@ -8,7 +9,7 @@ class MyStreamListenener(tweepy.StreamListener):
     Listen for data
     """
     def on_status(self, status):
-        print(status.text) # TODO this
+        print(status.coordinates) # TODO save to s
 
 if __name__ == '__main__':
     # Auth setup
@@ -31,7 +32,12 @@ if __name__ == '__main__':
 
     api = tweepy.API(auth_handler=auth)
 
-    myStreamListenener = MyStreamListenener()
-    stream = tweepy.Stream(auth=api.auth, listener=myStreamListenener)
-
-    stream.filter(track=['python'])
+    stream_listener = MyStreamListenener()
+    stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
+    f = open('track.txt')
+    line = f.readline()
+    tracking = []
+    while line:
+        tracking.append(line)
+        line = f.readline()
+    stream.filter(track=tracking)
