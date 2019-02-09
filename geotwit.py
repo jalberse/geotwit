@@ -9,6 +9,7 @@ class MyStreamListenener(tweepy.StreamListener):
     Listen for data
     """
     def on_status(self, status):
+        tokens = status.text.split()
         print(status.coordinates) # TODO save to s
 
 if __name__ == '__main__':
@@ -32,12 +33,19 @@ if __name__ == '__main__':
 
     api = tweepy.API(auth_handler=auth)
 
+    # Prepare files
+    with open('track.txt') as f:
+        tracking = f.read().splitlines()
+    for phrase in tracking:
+        filename = os.path.join('./',phrase + '.csv')
+        if not os.path.exists(filename):
+            os.mknod(filename)
+            with open(filename, 'w') as f:
+                writer = csv.writer(f)
+                writer.writerow(['lat', 'lon', 'timestamp'])
+
+
+    # Set up stream and start listening
     stream_listener = MyStreamListenener()
     stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
-    f = open('track.txt')
-    line = f.readline()
-    tracking = []
-    while line:
-        tracking.append(line)
-        line = f.readline()
     stream.filter(track=tracking)
