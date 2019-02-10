@@ -4,7 +4,7 @@ import csv
 if __name__ == "__main__":
     with open('all_tweets.csv', 'w+') as f:
         writer = csv.writer(f)
-        writer.writerow(['Longitude', 'Latitude', 'Timestamp', 'Status', 'Phrase'])
+        writer.writerow(['tweet_longitude', 'tweet_latitude', 'timestamp', 'status', 'phrase'])
 
         directory = './data/'
         for filename in os.listdir(directory):

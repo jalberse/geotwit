@@ -63,7 +63,7 @@ class MyStreamListenener(tweepy.StreamListener):
             if (DEBUG): print('saving to ./data/' + passed_filter + '.csv')
             w = csv.writer(file)
             lon = status.coordinates["coordinates"][0]
-            lat = status.coordinates["coordinates"][0]
+            lat = status.coordinates["coordinates"][1]
             if (DEBUG):
                 print(str(lon) + ',' + str(lat) + ',' + str(status.created_at))
             w.writerow([str(lon), str(lat), str(status.created_at), status.text])
