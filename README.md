@@ -48,8 +48,7 @@ Data is visualized using Kepler.gl - we use a custom .json configuration to init
 
 ## Challenges We ran into
 
-We had difficulty establishing a front-end for the service due to a lack of experience from our development team, which is composed of back-end and data analysis focused developers. This was our main challenge.
-
+We had difficulty establishing a front-end for the service due to a lack of experience from our development team, which is composed of back-end and data analysis focused developers. Our main challenge was figuring out how to properly host a website using PHP/mySQL. This was necessary in order to save data collected from user input. Although this was an obstacle, we were able to create a basic web page where we used html/CSS/javascript to implement the design of the GeoTwit application. Examples of the expected layout can be viewed in the image gallery. 
 It requires weeks to generate a proper corpus each iteration. Our current dataset is therefore inadequate to properly analyze.
 
 Our corpus is half its intended size, as half of the data collected had its coordinates saved as (longitude, longitude) due to an indexing error. This was fixed at midnight.
