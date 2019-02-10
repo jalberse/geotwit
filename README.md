@@ -16,7 +16,7 @@ As the corpus grows, tf-idf weighting increases in accuracy. Due to limitations 
 
 ## Use and Workflow
 
-If you simply wish to view our example data set, simply head to [kepler.gl](http://kepler.gl/demo) and upload our provided keplergl.json file. Otherwise, continue. 
+If you simply wish to view our example data set, head to [kepler.gl](http://kepler.gl/demo) and upload our provided keplergl.json file. Otherwise, continue. 
 
 Install pipenv, run the shell.
 
