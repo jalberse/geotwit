@@ -2,7 +2,11 @@
 
 ## Inspiration
 
-Analysis of data from social media, such as Twitter, can be extremely useful in disaster management or analyzing outbreaks, analyzing localized trending topics. People use platforms like twitter for discussion, talk about what's happening in recent times etc. With the motivation to visualize trending phrases or topics on social media, we are developing this GeoTwit app to be able to display the use of specific phrases at different locations in the US or Globally. There are certain local phrases which are used by people in specific region and can be visualized using the frequency of a phrase in collection of tweets. This app will allow users to view the use of certain keyphrases at different geographic locations. User would be able to enter their own list of keywords or our app will recommend top ranked phrases. For visualizing the tweets we are using kepler.gl tool.
+Analysis of local trending topics and the geographic distribution of data from social media such as Twitter can be extremely useful - for example, in disaster management or for analyzing viral outbreaks. Platforms like Twitter consist of rapidly evolving data as people discuss recent events. Therefore, rapidly obtaining up-to-date and trending data from social networks is desirable.
+
+With this in mind, we present GeoTwit, a data analysis and visualization workflow for geographic and temporal twitter data. Given a set of phrases, GeoTwit collects geotagged tweets containing each phrase and uses kepler.gl to visualize the resultant data set over space and time. For example, given a set of common political words ("Donald Trump", "Hillary Clinton", "Riot", "Yellow Vests") or weather events ("Fire", "Wildfire", "Smoke"), GeoTwit can visualize where and when tweets occur containing each of these phrases.
+
+Moreover, we provide functionality to extract important words from a corpus of tweets (these words represent "trending topics" for the timeframe over which the corpus was collected). With these words, one can generate a new corpus, providing an iterative approach to tracking trending topics over space and time.
 
 ![Kepler.gl visualization](screenshot.png)
 
