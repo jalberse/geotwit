@@ -23,7 +23,7 @@ def trending_words():
     weight = vectorizer.idf_
     #soring the weights
     indices = np.argsort(weight)[::-1]
-    top_weights = 100
+    top_weights = 400
     top_features = [feature_names[i] for i in indices[:top_weights]]
     with open('topn.txt', 'w') as f:
         for word in top_features:
