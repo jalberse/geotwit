@@ -1,6 +1,7 @@
 import json
 import os
 import csv
+import string
 
 import tweepy
 
@@ -19,18 +20,26 @@ class MyStreamListenener(tweepy.StreamListener):
         if status.coordinates == None:
             return
 
+        # TODO: This is a HORRIBLE way to determine which phrase was a hit
+        # But for the hackathon this should match at least match words...
+
         # Determine which phrase this status hits
         # crunch on status text
-        tokenized_status = status.text.split()
-        for token in tokenized_status:
-            token = token.casefold()
+        text = ''.join(x for x in status.text if x in string.ascii_letters + '\'- ')
+        text = text.split()
+        tokenized_status = []
+        # now ignore casing
+        for token in text:
+            tokenized_status.append(token.casefold())
         ##if (DEBUG): print("tokenized status: " + str(tokenized_status))
+        if DEBUG:
+            print(tokenized_status)
 
         # crunch on phrases
         tokenized_phrases_pairs = []
         for p in tracking:
-            p = p.casefold()
-            tokenized_phrases_pairs.append([p, p.split()])
+            x = p.casefold()
+            tokenized_phrases_pairs.append([x, x.split()])
         ##if (DEBUG): print("tokenized phrases: " + str(tokenized_phrases_pairs))
 
         # check which filter it passed
@@ -57,7 +66,7 @@ class MyStreamListenener(tweepy.StreamListener):
             lat = status.coordinates["coordinates"][0]
             if (DEBUG):
                 print(str(lon) + ',' + str(lat) + ',' + str(status.created_at))
-            w.writerow([str(lon), str(lat), str(status.created_at)])
+            w.writerow([str(lon), str(lat), str(status.created_at), status.text])
 
 if __name__ == '__main__':
     # Auth setup
@@ -93,7 +102,7 @@ if __name__ == '__main__':
             os.mknod(filename)
             with open(filename, 'w') as f:
                 writer = csv.writer(f)
-                writer.writerow(['Longitude', 'Latitude', 'Timestamp'])
+                writer.writerow(['Longitude', 'Latitude', 'Timestamp', 'Status'])
 
     # Set up stream and start listening
     stream_listener = MyStreamListenener(tracking)

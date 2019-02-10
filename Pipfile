@@ -7,6 +7,11 @@ verify_ssl = true
 
 [packages]
 tweepy = "*"
+logging = "*"
+nltk = "*"
+numpy = "*"
+pandas = "*"
+sklearn = "*"
 
 [requires]
 python_version = "3.7"
