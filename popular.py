@@ -17,7 +17,7 @@ def trending_words():
                      ignore_index=True)
 
     tokenizer = TweetTokenizer()
-    vectorizer = TfidfVectorizer(tokenizer=tokenizer.tokenize)
+    vectorizer = TfidfVectorizer(tokenizer=tokenizer.tokenize,ngram_range=(1,2))
     response = vectorizer.fit_transform(data['Status'])    # Map feature index to feature name
     feature_names = vectorizer.get_feature_names()    #  weight is the tf-idf value
     weight = vectorizer.idf_
