@@ -14,6 +14,24 @@ The recommended workflow is therefore to generate a seed corpus from the [400 mo
 
 As the corpus grows, tf-idf weighting increases in accuracy. Due to limitations of the free Twitter API and the relatively low number of tweets which are geo-tagged (~2-5%), generating a large body of data is time-intensive. Each iteration is therefore recommended to span multiple weeks.
 
+## Use and Workflow
+
+Install pipenv, run the shell.
+
+Create a track.txt file containing a list of phrases (one per line, max 400) to query. If you wish to generate a seed corpus from the most common english words, [this list](https://gist.github.com/deekayen/4148741) is helpful.
+
+Run geotwit.py to generate the corpus. **This is a long-running script, and may take weeks to generate a sufficiently large corpus**. 
+
+Run aggregate.py for post-processing, preparing data for Kepler.gl
+
+Go to [kepler.gl](http://kepler.gl/demo) and upload keplergl.json
+
+This will generate a visualization of the dataset using our recommended parameters. From here, modify parameters via kepler.gl to fit your visualization needs.
+
+You may now run popular.py to generate a list of the 400 most important phrases (max 2 words) from the corpus. This will be saved to topn.txt. 
+
+For the next iteration, copy topn.txt to track.txt and begin again with geotwit.py. 
+
 ## How We built it
 
 Data collection and processing was done exclusively with Python. The Tweepy streaming API was used for collecting data from Twitter. Sklearn was used for tf-idf weighting. 
