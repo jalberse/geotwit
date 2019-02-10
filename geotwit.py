@@ -99,12 +99,12 @@ if __name__ == '__main__':
         if not os.path.exists(filename):
             if not os.path.exists('./data/'):
                 os.mkdir('./data/')
-            os.mknod(filename)
-            with open(filename, 'w') as f:
+            with open(filename, 'a+') as f:
                 writer = csv.writer(f)
                 writer.writerow(['Longitude', 'Latitude', 'Timestamp', 'Status'])
 
     # Set up stream and start listening
     stream_listener = MyStreamListenener(tracking)
-    stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
+    stream = tweepy.Stream(auth=api.auth, listener=stream_listener,
+                           tweet_mode='extended')
     stream.filter(track=tracking)
