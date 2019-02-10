@@ -16,6 +16,8 @@ As the corpus grows, tf-idf weighting increases in accuracy. Due to limitations 
 
 ## Use and Workflow
 
+If you simply wish to view our example data set, simply head to [kepler.gl](http://kepler.gl/demo) and upload our provided keplergl.json file. Otherwise, continue. 
+
 Install pipenv, run the shell.
 
 Create a track.txt file containing a list of phrases (one per line, max 400) to query. If you wish to generate a seed corpus from the most common english words, [this list](https://gist.github.com/deekayen/4148741) is helpful.
