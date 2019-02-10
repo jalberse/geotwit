@@ -48,7 +48,7 @@ Data is visualized using Kepler.gl - we use a custom .json configuration to init
 
 ## Challenges We ran into
 
-We had difficulty establishing a front-end for the service due to a lack of experience from our development team, which is composed of back-end and data analysis focused developers. Our main challenge was figuring out how to properly host a website using PHP/mySQL. This was necessary in order to save data collected from user input. Although this was an obstacle, we were able to create a basic web page where we used html/CSS/javascript to implement the design of the GeoTwit application. Examples of the expected layout can be viewed in the image gallery. Make sure to check out our progress directly in our [GeoTwit webpage zip.] (https://github.com/jalberse/geotwit/blob/master/GeoTwit-webpage.zip)
+We had difficulty establishing a front-end for the service due to a lack of experience from our development team, which is composed of back-end and data analysis focused developers. Our main challenge was figuring out how to properly host a website using PHP/mySQL. This was necessary in order to save data collected from user input. Although this was an obstacle, we were able to create a basic web page where we used html/CSS/javascript to implement the design of the GeoTwit application. Examples of the expected layout can be viewed in the image gallery. Make sure to check out our progress directly in our ![GeoTwit webpage zip.] (https://github.com/jalberse/geotwit/blob/master/GeoTwit-webpage.zip)
 
 It requires weeks to generate a proper corpus each iteration. Our current dataset is therefore inadequate to properly analyze.
 
