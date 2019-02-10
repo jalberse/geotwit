@@ -4,13 +4,60 @@ import csv
 
 import tweepy
 
+DEBUG = 1
+
 class MyStreamListenener(tweepy.StreamListener):
     """
     Listen for data
     """
+    def __init__(self, tracking, api=None):
+        super().__init__(api)
+        self.tracking = tracking
+
     def on_status(self, status):
-        tokens = status.text.split()
-        print(status.coordinates) # TODO save to s
+        # skip if no geolocation
+        if status.coordinates == None:
+            return
+
+        # Determine which phrase this status hits
+        # crunch on status text
+        tokenized_status = status.text.split()
+        for token in tokenized_status:
+            token = token.casefold()
+        ##if (DEBUG): print("tokenized status: " + str(tokenized_status))
+
+        # crunch on phrases
+        tokenized_phrases_pairs = []
+        for p in tracking:
+            p = p.casefold()
+            tokenized_phrases_pairs.append([p, p.split()])
+        ##if (DEBUG): print("tokenized phrases: " + str(tokenized_phrases_pairs))
+
+        # check which filter it passed
+        passed_filter = ""
+        for p in tokenized_phrases_pairs:
+            if set(p[1]).issubset(set(tokenized_status)):
+                passed_filter = p[0]
+                if (DEBUG):
+                    print(status.text)
+                    print("passed filter: " + p[0])
+                break
+
+        if (passed_filter == ""):
+            # discrepency between our match and twitters, ignore
+            if (DEBUG):
+                print(status.text)
+                print("ignoring the problem (incorrect match)")
+            return
+
+        with open(os.path.join('./data/', passed_filter + '.csv'), 'a') as file:
+            if (DEBUG): print('saving to ./data/' + passed_filter + '.csv')
+            w = csv.writer(file)
+            lon = status.coordinates["coordinates"][0]
+            lat = status.coordinates["coordinates"][0]
+            if (DEBUG):
+                print(str(lon) + ',' + str(lat) + ',' + str(status.created_at))
+            w.writerow([str(lon), str(lat), str(status.created_at)])
 
 if __name__ == '__main__':
     # Auth setup
@@ -35,17 +82,20 @@ if __name__ == '__main__':
 
     # Prepare files
     with open('track.txt') as f:
-        tracking = f.read().splitlines()
+        tracking = f.read()
+        tracking = tracking.casefold()
+        tracking = tracking.splitlines()
     for phrase in tracking:
-        filename = os.path.join('./',phrase + '.csv')
+        filename = os.path.join('./data/',phrase + '.csv')
         if not os.path.exists(filename):
+            if not os.path.exists('./data/'):
+                os.mkdir('./data/')
             os.mknod(filename)
             with open(filename, 'w') as f:
                 writer = csv.writer(f)
-                writer.writerow(['lat', 'lon', 'timestamp'])
-
+                writer.writerow(['Longitude', 'Latitude', 'Timestamp'])
 
     # Set up stream and start listening
-    stream_listener = MyStreamListenener()
+    stream_listener = MyStreamListenener(tracking)
     stream = tweepy.Stream(auth=api.auth, listener=stream_listener)
     stream.filter(track=tracking)
