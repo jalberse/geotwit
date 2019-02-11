@@ -1,4 +1,4 @@
-# GeoTwit
+# GeoTwit - Hacklahoma 2019
 
 ## Motivation
 
