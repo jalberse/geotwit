@@ -43,39 +43,3 @@ This will generate a visualization of the dataset using our recommended paramete
 You may now run popular.py to generate a list of the 400 most important phrases (max 2 words) from the corpus. This will be saved to topn.txt.
 
 For the next iteration, copy topn.txt to track.txt and begin again with geotwit.py.
-
-## How We built it
-
-Data collection and processing was done exclusively with Python. The Tweepy streaming API was used for collecting data from Twitter. Sklearn was used for tf-idf weighting.
-
-Data is visualized using Kepler.gl - we use a custom .json configuration to initialize the data in kepler.gl correctly.
-
-## Challenges We ran into
-
-We had difficulty establishing a front-end for the service due to a lack of experience from our development team, which is composed of back-end and data analysis focused developers. Our main challenge was figuring out how to properly host a website using PHP/mySQL. This was necessary in order to save data collected from user input. Although this was an obstacle, we were able to create a basic web page where we used html/CSS/javascript to implement the design of the GeoTwit application. Examples of the expected layout can be viewed in the image gallery. Make sure to check out our progress directly in our [GeoTwit webpage zip.](https://github.com/jalberse/geotwit/blob/master/GeoTwit-webpage.zip)
-
-It requires weeks to generate a proper corpus each iteration. Our current dataset is therefore inadequate to properly analyze.
-
-Our corpus is half its intended size, as half of the data collected had its coordinates saved as (longitude, longitude) due to an indexing error. This was fixed at midnight.
-
-## Accomplishments that I'm proud of
-
-The Twitter streaming API allows the developer to track all tweets containing a phrase or set of phrases. We are interested in tracking all tweets containing any phrase from a set of 400 phrases. The Twitter API allows us to do so, but will not identify which phrase the tweet contains - we are not able to categorize tweets by which phrase they contain. To work around this, we manually parse the text of each Tweet to determine for which phrase it was a "hit."
-
-## What I learned
-
-Some hard lessons about the work involved in front-end development.
-
-Story boarding and use case driven development.
-
-Lessons about properly organizing a team of developers.
-
-Finally, limiting the geographic range of the collected data would result in a larger body of data more quickly due to the limitations of the free Twitter API. It would be best in the future to look ahead to such limitations before gathering data.
-
-## What's next for GeoTwit
-
-Establishing a front-end which decreases the friction of collecting and analyzing this data.
-
-Identification of trending words can be improved by implementing clustering of documents (tweets) for tfid vectorizer.
-
-Due to the low number of tweets which are geo-tagged, the corpus generated each iteration is relatively small. However, it is possible to predict the location of a tweet based off of information in the tweet. Integrating this research into the GeoTwit project could potentially increase the size of our data sets and decrease the time between each iteration.
